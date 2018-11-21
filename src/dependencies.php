@@ -4,7 +4,7 @@
 $container = $app->getContainer();
 
 // monolog
-$container['logger'] = function ($c) {
+$container['logger'] = function ($c): Monolog\Logger {
     $settings = $c->get('settings')['logger'];
     $logger = new Monolog\Logger($settings['name']);
     $logger->pushProcessor(new Monolog\Processor\UidProcessor());
@@ -12,7 +12,7 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
-$container['db'] = function ($c) {
+$container['db'] = function ($c): PDO {
     $db = $c['settings']['db'];
     $pdo = new PDO('mysql:host=' . $db['host'] . ';dbname=' . $db['dbname'], $db['user'], $db['pass']);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

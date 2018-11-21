@@ -8,7 +8,7 @@ use Slim\Http\Response;
 
 // Permanently redirect path with trailing slash.
 
-$app->add(function(Request $request, Response $response, callable $next){
+$app->add(function(Request $request, Response $response, callable $next): Response{
     $uri = $request->getUri();
     $path = $uri->getPath();
 
