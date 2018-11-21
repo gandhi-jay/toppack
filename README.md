@@ -11,7 +11,7 @@ Create .env file before starting any development or deployment.
 
 To run the application in development, you can run these commands 
 
-	cd [my-app-name]
+	cd toppack
 	php composer.phar start
 	
 or install Composer globally, for mac

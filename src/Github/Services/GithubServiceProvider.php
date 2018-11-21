@@ -14,7 +14,12 @@ namespace Github\Services;
  * @package Github\Services
  */
 class GithubServiceProvider {
+    private $GithubAPIKey;
     function __construct()
     {
+    }
+
+    function search(string $name) {
+
     }
 }
