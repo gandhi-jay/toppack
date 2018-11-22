@@ -1,0 +1,50 @@
+
+version: '2'
+
+services:
+  slim_web:
+    container_name: toppack_core
+    image: toppack:latest
+    working_dir: /var/www
+    command: composer start
+    environment:
+      docker: "true"
+      COMPOSER_ALLOW_SUPERUSER: 1
+      APP_DEBUG: "true"
+      DB_CONNECTION: mysql
+      DB_HOST: maria
+      DB_PORT: 3306
+      DB_DATABASE: toppack
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/var/www
+      - ./logs:/var/www/logs
+    depends_on:
+      - maria
+      - redis
+  maria:
+    container_name: toppack_db
+    image: mariadb:10.2
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  redis:
+    container_name: toppack_caching
+    image: redis:latest
+    command: redis-server --save "" --appendonly no
+  phpmyadmin:
+    container_name: toppack_admin
+    image: phpmyadmin/phpmyadmin
+    ports:
+    - "8181:80"
+    environment:
+      PMA_HOST: maria
+      PMA_PORT: 3306
+    volumes:
+    - /sessions
+    depends_on:
+    - maria
