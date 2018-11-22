@@ -22,7 +22,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - .:/var/www
+      - ./:/var/www
       - ./logs:/var/www/logs
     depends_on:
       - maria
